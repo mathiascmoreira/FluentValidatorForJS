@@ -1,5 +1,4 @@
-//ObjectValidation
-//PropertyValidation
+
 var validator = new ObjectValidation();
 
 validator
@@ -7,10 +6,12 @@ validator
 .property('property', 'Alias')
     .notNull()
     .greaterThan()
-    .then(() => validator.property().greaterThenOrEqualTo())
-.context('salvar', validator.property('property').greaterThenOrEqualTo())
-.condition(condition, validator.property('property').greaterThenOrEqualTo());
+    .must((value, object) => value > object['property'])
+    .onlyFirstError()
+.context('salvar', validator.property('property').greaterThenOrEqualTo(2))
+.condition(condition, validator.property('property').greaterThenOrEqualTo(2));
 
 
     
     validator.validate(object);
+
