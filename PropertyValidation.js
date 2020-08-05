@@ -15,6 +15,7 @@ class PropertyValidation {
 
     onlyFirstError() {
         this._onlyFirstError = true;
+        return this;
     }   
 
     must(custonRule, customMessage) {
@@ -30,47 +31,71 @@ class PropertyValidation {
         return this;
     }
 
-    notNull(message) {
+    equalsTo() {
+
+    }
+
+    notEqualsTo() {
+
+    }
+
+    nullOrUndefined() {
+
+    }
+    
+    notNullAndNotUndefined() {
+
+    }
+
+    notNull(customMessage) {
+        let rule = (value) => value !== null;
+        let message = customMessage || `${this._alias || this._propertyName} can't be null`;
+        this._addValidation(rule, message);
+        return this;
+    }
+
+    empty(customMessage) {
         //NOT IMPLEMENTED
         return this;
     }
 
-    empty(message) {
+    integer() {
+
+    }
+
+    notEmpty(customMessage) {
         //NOT IMPLEMENTED
         return this;
     }
 
-    notEmpty(message) {
+    greaterThen(customMessage) {
         //NOT IMPLEMENTED
         return this;
     }
 
-    greaterThen(message) {
+    greaterThenOrEqualTo(valueToCompare, customMessage) {
+        let rule = (value) => value >= valueToCompare;
+        let message = customMessage || `${this._alias || this._propertyName} must be greater than or equal to ${valueToCompare}`;
+        this._addValidation(rule, message);
+        return this;
+    }
+
+    lessThen(customMessage) {
         //NOT IMPLEMENTED
         return this;
     }
 
-    greaterThenOrEqualTo(message) {
+    lessThenOrEqualTo(customMessage) {
         //NOT IMPLEMENTED
         return this;
     }
 
-    lessThen(message) {
+    maximumLength(customMessage) {
         //NOT IMPLEMENTED
         return this;
     }
 
-    lessThenOrEqualTo(message) {
-        //NOT IMPLEMENTED
-        return this;
-    }
-
-    maximumLength(message) {
-        //NOT IMPLEMENTED
-        return this;
-    }
-
-    minimumLength(message) {
+    minimumLength(customMessage) {
         //NOT IMPLEMENTED
         return this;
     }
@@ -83,13 +108,14 @@ class PropertyValidation {
         if(!this._condition())
             return;
 
-        let value = object[this.propertyName];
+        let value = object[this._propertyName];
 
-        this._validations.forEach(validation => {
+        this._validations.every(validation => {
             validation(value, object);
 
-            if(this._onlyFirstError && this._objectValidation.hasFailures())
-                break;
+            var teste = !(this._onlyFirstError && this._objectValidation.hasFailures());
+
+            return !(this._onlyFirstError && this._objectValidation.hasFailures());
         } )
     }
 
@@ -101,9 +127,9 @@ class PropertyValidation {
         let validation = (value, object) => {
             if (!rule(value, object)) {
                 let failure = {
-                    propertyName = this._propertyName,
-                    alias = this._alias,
-                    message = message
+                    propertyName: this._propertyName,
+                    alias: this._alias,
+                    message: message
                 };
                 this._objectValidation.addFailure(failure);
             }
@@ -111,3 +137,5 @@ class PropertyValidation {
         this._validations.push(validation);
     }
 }
+
+module.exports = PropertyValidation;

@@ -1,3 +1,5 @@
+const PropertyValidation = require('./PropertyValidation');
+
 class ObjectValidation {
     constructor() {
         this._contextName = '';
@@ -8,8 +10,8 @@ class ObjectValidation {
         this._propertyValidations = [];
 
         this._validationResult = {
-            isValid = true,
-            failures = []
+            isValid: true,
+            failures: []
         };
     }
 
@@ -18,8 +20,8 @@ class ObjectValidation {
     }
 
     property(propertyName, alias) {
-        let propertyValidation = new PropertyValidation(this._validationResult, propertyName, alias, this._contextName, this._condition)
-        this.propertyValidations.push(propertyValidation)
+        let propertyValidation = new PropertyValidation(this, propertyName, alias, this._contextName, this._condition)
+        this._propertyValidations.push(propertyValidation);
         return propertyValidation;
     }
 
@@ -37,15 +39,31 @@ class ObjectValidation {
     }
 
     validate(object, contexts) {
+        contexts = contexts ? contexts : [''];
+
+        let propertyValidations = this._propertyValidations
+            .filter(c => c.belongsToContexts(contexts));
+
+        propertyValidations.every(propertyValidation => {
+            propertyValidation.validate(object);
+
+            return !(this._onlyFirstError && this.hasFailures());
+        });
+
+        return this._validationResult;
+    }
+
+    printValidationTree(contexts) {
         let propertyValidations = contexts ?
             this._propertyValidations.filter(c => c.belongsToContexts(contexts)) :
             this._propertyValidations;
 
-        propertyValidations.forEach(PropertyValidation => {
-            PropertyValidation.validate(object);
-
-            if(this._onlyFirstError && this.hasFailures() > 0)
-                break;
+        propertyValidations.forEach(propertyValidation => {
+            console.log({
+                context: propertyValidation._contextName,
+                condition: propertyValidation._condition.toString(),
+                validations: propertyValidation._validations.map(c => c.toString())
+            });
         });
 
         return this._validationResult;
@@ -57,7 +75,9 @@ class ObjectValidation {
     }
 
     hasFailures() {
-        return this._validationResult.isValid;
+        return !this._validationResult.isValid;
     }
 }
 
+
+module.exports = ObjectValidation;
