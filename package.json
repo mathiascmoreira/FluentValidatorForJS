@@ -4,5 +4,8 @@
   },
   "devDependencies": {
     "jest": "^26.2.2"
+  },
+  "dependencies": {
+    "yup": "^0.29.3"
   }
 }
