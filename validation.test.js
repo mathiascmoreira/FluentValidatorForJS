@@ -7,7 +7,7 @@ test('arrayProperty().empty() with undefined value', () => {
 
     let result = validator.validate({
         test2: null
-    })
+    });
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
@@ -19,7 +19,7 @@ test('arrayProperty().empty() with null value', () => {
 
     let result = validator.validate({
         test: null
-    })
+    });
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
@@ -31,7 +31,7 @@ test('arrayProperty().empty() with filled array', () => {
 
     let result = validator.validate({
         test: [1, 2]
-    })
+    });
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
@@ -43,7 +43,7 @@ test('arrayProperty().empty() with empty array', () => {
 
     let result = validator.validate({
         test: []
-    })
+    });
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
@@ -55,7 +55,7 @@ test('arrayProperty().length(10) with undefined value', () => {
 
     let result = validator.validate({
         test2: null
-    })
+    });
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
@@ -67,7 +67,7 @@ test('arrayProperty().length(10) with null value', () => {
 
     let result = validator.validate({
         test: null
-    })
+    });
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
@@ -79,7 +79,7 @@ test('arrayProperty().length(10) with filled array with less than 10 items', () 
 
     let result = validator.validate({
         test: [1, 2, 3]
-    })
+    });
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
@@ -91,7 +91,7 @@ test('arrayProperty().length(10) with filled array with more than 10 items', () 
 
     let result = validator.validate({
         test: [1, 2, 3, 4, 5, 6, 7, 9, 9, 10, 11, 12]
-    })
+    });
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
@@ -103,7 +103,7 @@ test('arrayProperty().length(10) with filled array with 10 items', () => {
 
     let result = validator.validate({
         test: [1, 2, 3, 4, 5, 6, 7, 9, 9, 10]
-    })
+    });
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
@@ -115,7 +115,7 @@ test('arrayProperty().length(10) with empty array', () => {
 
     let result = validator.validate({
         test: []
-    })
+    });
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
@@ -127,7 +127,7 @@ test('arrayProperty().maximumLength(10) with undefined value', () => {
 
     let result = validator.validate({
         test2: []
-    })
+    });
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
@@ -139,7 +139,7 @@ test('arrayProperty().maximumLength(10) with null value', () => {
 
     let result = validator.validate({
         test: null
-    })
+    });
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
@@ -151,7 +151,7 @@ test('arrayProperty().maximumLength(10) with filled array with more than 10 item
 
     let result = validator.validate({
         test: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-    })
+    });
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
@@ -163,7 +163,7 @@ test('arrayProperty().maximumLength(10) with filled array with less than 10 item
 
     let result = validator.validate({
         test: [1, 2, 3, 4, 5, 6, 7]
-    })
+    });
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
@@ -175,7 +175,7 @@ test('arrayProperty().maximumLength(10) with filled array with 10 items', () => 
 
     let result = validator.validate({
         test: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    })
+    });
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
@@ -187,7 +187,7 @@ test('arrayProperty().maximumLength(10) with empty array', () => {
 
     let result = validator.validate({
         test: []
-    })
+    });
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
@@ -199,7 +199,7 @@ test('arrayProperty().minimumLength(10) with undefined value', () => {
 
     let result = validator.validate({
         test2: []
-    })
+    });
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
@@ -211,7 +211,7 @@ test('arrayProperty().minimumLength(10) with null value', () => {
 
     let result = validator.validate({
         test: null
-    })
+    });
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
@@ -223,7 +223,7 @@ test('arrayProperty().minimumLength(10) with filled array with more than 10 item
 
     let result = validator.validate({
         test: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-    })
+    });
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
@@ -235,7 +235,7 @@ test('arrayProperty().minimumLength(10) with filled array with less than 10 item
 
     let result = validator.validate({
         test: [1, 2, 3, 4, 5, 6, 7]
-    })
+    });
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
@@ -247,7 +247,7 @@ test('arrayProperty().minimumLength(10) with filled array with 10 items', () => 
 
     let result = validator.validate({
         test: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    })
+    });
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
@@ -259,7 +259,7 @@ test('arrayProperty().minimumLength(10) with empty array', () => {
 
     let result = validator.validate({
         test: []
-    })
+    });
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
@@ -271,7 +271,7 @@ test('arrayProperty().notEmpty() with undefined value', () => {
 
     let result = validator.validate({
         test2: []
-    })
+    });
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
@@ -283,7 +283,7 @@ test('arrayProperty().notEmpty() with null value', () => {
 
     let result = validator.validate({
         test: null
-    })
+    });
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
@@ -295,7 +295,7 @@ test('arrayProperty().notEmpty() with filled array', () => {
 
     let result = validator.validate({
         test: [1, 2, 3, 4]
-    })
+    });
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
@@ -307,7 +307,7 @@ test('arrayProperty().notEmpty() with empty array', () => {
 
     let result = validator.validate({
         test: []
-    })
+    });
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
@@ -319,7 +319,7 @@ test('booleanProperty().mustBeFalse() with true value', () => {
 
     let result = validator.validate({
         test: true
-    })
+    });
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
@@ -331,7 +331,7 @@ test('booleanProperty().mustBeFalse() with false value', () => {
 
     let result = validator.validate({
         test: false
-    })
+    });
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
@@ -361,7 +361,7 @@ test('booleanProperty().mustBeFalse() with truthy values', () => {
         test8: {
             test: 2
         }
-    })
+    });
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(8);
@@ -387,7 +387,7 @@ test('booleanProperty().mustBeFalse() with falsy values', () => {
         test5: "",
         test6: ``,
         test7: null
-    })
+    });
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(8);
@@ -418,7 +418,7 @@ test('booleanProperty().mustBeFalsy() with truthy values', () => {
         test9: {
             test: 2
         },
-    })
+    });
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(9);
@@ -446,7 +446,7 @@ test('booleanProperty().mustBeFalsy() with falsy values', () => {
         test6: "",
         test7: ``,
         test8: null
-    })
+    });
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
@@ -458,7 +458,7 @@ test('booleanProperty().mustBeTrue() with true value', () => {
 
     let result = validator.validate({
         test: true
-    })
+    });
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
@@ -470,7 +470,7 @@ test('booleanProperty().mustBeTrue() with false value', () => {
 
     let result = validator.validate({
         test: false
-    })
+    });
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
@@ -499,7 +499,7 @@ test('booleanProperty().mustBeTrue() with truthy values', () => {
         test8: {
             test: 2
         }
-    })
+    });
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(8);
@@ -525,7 +525,7 @@ test('booleanProperty().mustBeTrue() with falsy values', () => {
         test5: "",
         test6: ``,
         test7: null
-    })
+    });
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(8);
@@ -556,7 +556,7 @@ test('booleanProperty().mustBeTruthy() with truthy values', () => {
         test9: {
             test: 2
         },
-    })
+    });
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
@@ -584,44 +584,243 @@ test('booleanProperty().mustBeTruthy() with falsy values', () => {
         test6: "",
         test7: ``,
         test8: null
-    })
+    });
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(9);
 });
+test('dateProperty().greaterThenOrEqualsTo(new Date(2020, 5, 6)) with a null value', () => {
+    let validator = new ObjectValidation();
+
+    validator
+        .dateProperty('test').greaterThenOrEqualsTo(new Date(2020, 5, 6))
+
+    let result = validator.validate({
+        test: null,
+    });
+
+    expect(result.isValid).toBe(false);
+    expect(result.failures).toHaveLength(1);
+})
+
+test('dateProperty().greaterThenOrEqualsTo(new Date(2020, 5, 6)) with an undefined value', () => {
+    let validator = new ObjectValidation();
+
+    validator
+        .dateProperty('test').greaterThenOrEqualsTo(new Date(2020, 5, 6))
+
+    let result = validator.validate({
+        test2: null,
+    });
+
+    expect(result.isValid).toBe(false);
+    expect(result.failures).toHaveLength(1);
+})
+test('dateProperty().greaterThenOrEqualsTo(new Date(2020, 5, 6)) with a date value greater than the date to compare', () => {
+    let validator = new ObjectValidation();
+
+    validator
+        .dateProperty('test').greaterThenOrEqualsTo(new Date(2020, 5, 6))
+
+    let result = validator.validate({
+        test: new Date(2020, 8, 6),
+    });
+
+    expect(result.isValid).toBe(true);
+    expect(result.failures).toHaveLength(0);
+})
+test('dateProperty().greaterThenOrEqualsTo(new Date(2020, 5, 6)) with a date value less than the date to compare', () => {
+    let validator = new ObjectValidation();
+
+    validator
+        .dateProperty('test').greaterThenOrEqualsTo(new Date(2020, 5, 6))
+
+    let result = validator.validate({
+        test: new Date(2020, 2, 6),
+    });
+
+    expect(result.isValid).toBe(false);
+    expect(result.failures).toHaveLength(1);
+})
+test('dateProperty().greaterThenOrEqualsTo(new Date(2020, 5, 6)) with a date value equals to the date to compare', () => {
+    let validator = new ObjectValidation();
+
+    validator
+        .dateProperty('test').greaterThenOrEqualsTo(new Date(2020, 5, 6))
+
+    let result = validator.validate({
+        test: new Date(2020, 5, 6),
+    });
+
+    expect(result.isValid).toBe(true);
+    expect(result.failures).toHaveLength(0);
+})
+test('dateProperty().between(new Date(2020, 5, 1), new Date(2020, 5, 30)) with null value', () => {
+    let validator = new ObjectValidation();
+
+    validator
+        .dateProperty('test')
+        .between(new Date(2020, 5, 1), new Date(2020, 5, 30));
+
+    let result = validator.validate({
+        test: null
+    });
+
+    expect(result.isValid).toBe(false);
+    expect(result.failures).toHaveLength(1);
+})
+test('dateProperty().between(new Date(2020, 5, 1), new Date(2020, 5, 30)) with undefined value', () => {
+    let validator = new ObjectValidation();
+
+    validator
+        .dateProperty('test')
+        .between(new Date(2020, 5, 1), new Date(2020, 5, 30));
+
+    let result = validator.validate({
+        test2: null
+    });
+
+    expect(result.isValid).toBe(false);
+    expect(result.failures).toHaveLength(1);
+})
+test('dateProperty().between(new Date(2020, 5, 1), new Date(2020, 5, 30)) with value before the interval', () => {
+    let validator = new ObjectValidation();
+
+    validator
+        .dateProperty('test')
+        .between(new Date(2020, 5, 1), new Date(2020, 5, 30));
+
+    let result = validator.validate({
+        test: new Date(2020, 4, 6),
+    });
+
+    expect(result.isValid).toBe(false);
+    expect(result.failures).toHaveLength(1);
+})
+test('dateProperty().between(new Date(2020, 5, 1), new Date(2020, 5, 30)) with value after the interval', () => {
+    let validator = new ObjectValidation();
+
+    validator
+        .dateProperty('test')
+        .between(new Date(2020, 5, 1), new Date(2020, 5, 30));
+
+    let result = validator.validate({
+        test: new Date(2020, 8, 6),
+    });
+
+    expect(result.isValid).toBe(false);
+    expect(result.failures).toHaveLength(1);
+})
+test('dateProperty().between(new Date(2020, 5, 1), new Date(2020, 5, 30)) with value equals to min date', () => {
+    let validator = new ObjectValidation();
+
+    validator
+        .dateProperty('test')
+        .between(new Date(2020, 5, 1), new Date(2020, 5, 30));
+
+    let result = validator.validate({
+        test: new Date(2020, 5, 1),
+    });
+
+    expect(result.isValid).toBe(true);
+    expect(result.failures).toHaveLength(0);
+})
+test('dateProperty().between(new Date(2020, 5, 1), new Date(2020, 5, 30)) with value equals to max date', () => {
+    let validator = new ObjectValidation();
+
+    validator
+        .dateProperty('test')
+        .between(new Date(2020, 5, 1), new Date(2020, 5, 30));
+
+    let result = validator.validate({
+        test: new Date(2020, 5, 30),
+    });
+
+    expect(result.isValid).toBe(true);
+    expect(result.failures).toHaveLength(0);
+})
+test('dateProperty().between(new Date(2020, 5, 1), new Date(2020, 5, 30)) with value within the interval', () => {
+    let validator = new ObjectValidation();
+
+    validator
+        .dateProperty('test')
+        .between(new Date(2020, 5, 1), new Date(2020, 5, 30));
+
+    let result = validator.validate({
+        test: new Date(2020, 5, 15),
+    });
+
+    expect(result.isValid).toBe(true);
+    expect(result.failures).toHaveLength(0);
+})
+test('dateProperty().lessThenOrEqualsTo(new Date(2020, 5, 6)) with a null value', () => {
+    let validator = new ObjectValidation();
+
+    validator
+        .dateProperty('test').lessThenOrEqualsTo(new Date(2020, 5, 6))
+
+    let result = validator.validate({
+        test: null,
+    });
+
+    expect(result.isValid).toBe(true);
+    expect(result.failures).toHaveLength(0);
+})
+
+test('dateProperty().lessThenOrEqualsTo(new Date(2020, 5, 6)) with an undefined value', () => {
+    let validator = new ObjectValidation();
+
+    validator
+        .dateProperty('test').lessThenOrEqualsTo(new Date(2020, 5, 6))
+
+    let result = validator.validate({
+        test2: null,
+    });
+
+    expect(result.isValid).toBe(true);
+    expect(result.failures).toHaveLength(0);
+})
+test('dateProperty().lessThenOrEqualsTo(new Date(2020, 5, 6)) with a date value greater than the date to compare', () => {
+    let validator = new ObjectValidation();
+
+    validator
+        .dateProperty('test').lessThenOrEqualsTo(new Date(2020, 5, 6))
+
+    let result = validator.validate({
+        test: new Date(2020, 8, 6),
+    });
+
+    expect(result.isValid).toBe(false);
+    expect(result.failures).toHaveLength(1);
+})
+test('dateProperty().lessThenOrEqualsTo(new Date(2020, 5, 6)) with a date value less than the date to compare', () => {
+    let validator = new ObjectValidation();
+
+    validator
+        .dateProperty('test').lessThenOrEqualsTo(new Date(2020, 5, 6))
+
+    let result = validator.validate({
+        test: new Date(2020, 2, 6),
+    });
+
+    expect(result.isValid).toBe(true);
+    expect(result.failures).toHaveLength(0);
+})
+test('dateProperty().lessThenOrEqualsTo(new Date(2020, 5, 6)) with a date value equals to the date to compare', () => {
+    let validator = new ObjectValidation();
+
+    validator
+        .dateProperty('test').lessThenOrEqualsTo(new Date(2020, 5, 6))
+
+    let result = validator.validate({
+        test: new Date(2020, 5, 6),
+    });
+
+    expect(result.isValid).toBe(true);
+    expect(result.failures).toHaveLength(0);
+})
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// booleanProperty().()
-
-// booleanProperty().mustBeTrue()
-
-// booleanProperty().mustBeTruthy()
 
 
 

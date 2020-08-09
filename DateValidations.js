@@ -20,7 +20,7 @@ class DateValidations extends PropertyValidator {
     }
     //Validates if the value is less than or equals to a given date. 
     lessThenOrEqualsTo(dateToCompare, customMessage) {
-        let rule = (date) => date <= dateToCompare;
+        let rule = (date) => !date || date <= dateToCompare;
         let message = customMessage || `${this.propertyDescription()} must be less than or equal to ${dateToCompare}`;
         this._addValidation(rule, message);
         return this;
