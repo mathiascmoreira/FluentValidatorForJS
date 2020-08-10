@@ -2,7 +2,7 @@ const ArrayValidations = require('./ArrayValidations');
 const BooleanValidations = require('./BooleanValidations');
 const DateValidations = require('./DateValidations');
 const NumberValidations = require('./NumberValidations');
-//const StringValidations = require('./StringValidations');
+const StringValidations = require('./StringValidations');
 
 class ObjectValidator {
     constructor() {
@@ -42,12 +42,12 @@ class ObjectValidator {
         return validations;
     }
     objectProperty(propertyName, alias) {
-        // let validations = new BooleanValidations(this, propertyName, alias, this._contextName, this._condition);
+        // let validations = new BooleanValidations(this, propertyName, alias, this._context, this._condition);
         // this._validations.push(validations);
         // return validations;
     }
     stringProperty(propertyName, alias) {
-        let validations = new StringValidations(this, propertyName, alias, this._contextName, this._condition);
+        let validations = new StringValidations(this, propertyName, alias, this._context, this._condition);
         this._validations.push(validations);
         return validations;
     }
