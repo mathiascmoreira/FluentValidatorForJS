@@ -6,8 +6,8 @@ const StringValidations = require('./StringValidations');
 
 class ObjectValidator {
     constructor() {
-        this._context = this._noContext();
-        this._condition = this._noCondition();
+        this._context = '';
+        this._conditions = [];
 
         this._validationResult = this._validationSuccess();
         
@@ -17,37 +17,37 @@ class ObjectValidator {
     }
 
     arrayProperty(propertyName, alias) {
-        let validations = new ArrayValidations(this, propertyName, alias, this._context, this._condition);
+        let validations = new ArrayValidations(this, propertyName, alias, this._context, [...this._conditions]);
         this._validations.push(validations);
         return validations;
     }
     boolProperty(propertyName, alias) {
-        let validations = new BooleanValidations(this, propertyName, alias, this._context, this._condition);
+        let validations = new BooleanValidations(this, propertyName, alias, this._context, [...this._conditions]);
         this._validations.push(validations);
         return validations;
     }
     booleanProperty(propertyName, alias) {
-        let validations = new BooleanValidations(this, propertyName, alias, this._context, this._condition);
+        let validations = new BooleanValidations(this, propertyName, alias, this._context, [...this._conditions]);
         this._validations.push(validations);
         return validations;
     }
     dateProperty(propertyName, alias) {
-        let validations = new DateValidations(this, propertyName, alias, this._context, this._condition);
+        let validations = new DateValidations(this, propertyName, alias, this._context, [...this._conditions]);
         this._validations.push(validations);
         return validations;
     }
     numberProperty(propertyName, alias) {
-        let validations = new NumberValidations(this, propertyName, alias, this._context, this._condition);
+        let validations = new NumberValidations(this, propertyName, alias, this._context, [...this._conditions]);
         this._validations.push(validations);
         return validations;
     }
     objectProperty(propertyName, alias) {
-        // let validations = new BooleanValidations(this, propertyName, alias, this._context, this._condition);
+        // let validations = new ObjectValidations(this, propertyName, alias, this._context, [...this._conditions]);
         // this._validations.push(validations);
         // return validations;
     }
     stringProperty(propertyName, alias) {
-        let validations = new StringValidations(this, propertyName, alias, this._context, this._condition);
+        let validations = new StringValidations(this, propertyName, alias, this._context, [...this._conditions]);
         this._validations.push(validations);
         return validations;
     }
@@ -60,10 +60,9 @@ class ObjectValidator {
         this._contextName = '';
     }
     condition(condition, rules) {
-        let previousCondition = this._condition;
-        this._condition = previousCondition && condition;
+        this._conditions.push(condition);
         rules();
-        this._condition = previousCondition;
+        this._conditions.pop();
     }
     addFailure(failure) {
         this._validationResult.failures.push(failure);
@@ -86,12 +85,6 @@ class ObjectValidator {
         });
 
         return this._validationResult;
-    }
-    _noCondition() {
-        return () => true;
-    }
-    _noContext() {
-        return '';
     }
     _validationSuccess() {
       return  {

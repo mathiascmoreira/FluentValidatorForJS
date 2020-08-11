@@ -1,7 +1,7 @@
-const ObjectValidation = require('../src/ObjectValidator');
+const ObjectValidator = require('../src/ObjectValidator');
 
 test('arrayProperty().empty() with undefined value', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').empty();
 
@@ -13,7 +13,7 @@ test('arrayProperty().empty() with undefined value', () => {
     expect(result.failures).toHaveLength(0);
 });
 test('arrayProperty().empty() with null value', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').empty();
 
@@ -25,7 +25,7 @@ test('arrayProperty().empty() with null value', () => {
     expect(result.failures).toHaveLength(0);
 });
 test('arrayProperty().empty() with filled array', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').empty();
 
@@ -37,7 +37,7 @@ test('arrayProperty().empty() with filled array', () => {
     expect(result.failures).toHaveLength(1);
 });
 test('arrayProperty().empty() with empty array', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').empty();
 
@@ -49,7 +49,7 @@ test('arrayProperty().empty() with empty array', () => {
     expect(result.failures).toHaveLength(0);
 });
 test('arrayProperty().length(10) with undefined value', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').length(10);
 
@@ -61,7 +61,7 @@ test('arrayProperty().length(10) with undefined value', () => {
     expect(result.failures).toHaveLength(1);
 });
 test('arrayProperty().length(10) with null value', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').length(10);
 
@@ -73,7 +73,7 @@ test('arrayProperty().length(10) with null value', () => {
     expect(result.failures).toHaveLength(1);
 });
 test('arrayProperty().length(10) with filled array with less than 10 items', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').length(10);
 
@@ -85,7 +85,7 @@ test('arrayProperty().length(10) with filled array with less than 10 items', () 
     expect(result.failures).toHaveLength(1);
 });
 test('arrayProperty().length(10) with filled array with more than 10 items', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').length(10);
 
@@ -97,7 +97,7 @@ test('arrayProperty().length(10) with filled array with more than 10 items', () 
     expect(result.failures).toHaveLength(1);
 });
 test('arrayProperty().length(10) with filled array with 10 items', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').length(10);
 
@@ -109,7 +109,7 @@ test('arrayProperty().length(10) with filled array with 10 items', () => {
     expect(result.failures).toHaveLength(0);
 });
 test('arrayProperty().length(10) with empty array', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').length(10);
 
@@ -121,7 +121,7 @@ test('arrayProperty().length(10) with empty array', () => {
     expect(result.failures).toHaveLength(1);
 });
 test('arrayProperty().maximumLength(10) with undefined value', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').maximumLength(10);
 
@@ -133,7 +133,7 @@ test('arrayProperty().maximumLength(10) with undefined value', () => {
     expect(result.failures).toHaveLength(0);
 });
 test('arrayProperty().maximumLength(10) with null value', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').maximumLength(10);
 
@@ -145,7 +145,7 @@ test('arrayProperty().maximumLength(10) with null value', () => {
     expect(result.failures).toHaveLength(0);
 });
 test('arrayProperty().maximumLength(10) with filled array with more than 10 items', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').maximumLength(10);
 
@@ -157,7 +157,7 @@ test('arrayProperty().maximumLength(10) with filled array with more than 10 item
     expect(result.failures).toHaveLength(1);
 });
 test('arrayProperty().maximumLength(10) with filled array with less than 10 items', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').maximumLength(10);
 
@@ -169,7 +169,7 @@ test('arrayProperty().maximumLength(10) with filled array with less than 10 item
     expect(result.failures).toHaveLength(0);
 });
 test('arrayProperty().maximumLength(10) with filled array with 10 items', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').maximumLength(10);
 
@@ -181,7 +181,7 @@ test('arrayProperty().maximumLength(10) with filled array with 10 items', () => 
     expect(result.failures).toHaveLength(0);
 });
 test('arrayProperty().maximumLength(10) with empty array', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').maximumLength(10);
 
@@ -193,7 +193,7 @@ test('arrayProperty().maximumLength(10) with empty array', () => {
     expect(result.failures).toHaveLength(0);
 });
 test('arrayProperty().minimumLength(10) with undefined value', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').minimumLength(10);
 
@@ -205,7 +205,7 @@ test('arrayProperty().minimumLength(10) with undefined value', () => {
     expect(result.failures).toHaveLength(1);
 });
 test('arrayProperty().minimumLength(10) with null value', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').minimumLength(10);
 
@@ -217,7 +217,7 @@ test('arrayProperty().minimumLength(10) with null value', () => {
     expect(result.failures).toHaveLength(1);
 });
 test('arrayProperty().minimumLength(10) with filled array with more than 10 items', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').minimumLength(10);
 
@@ -229,7 +229,7 @@ test('arrayProperty().minimumLength(10) with filled array with more than 10 item
     expect(result.failures).toHaveLength(0);
 });
 test('arrayProperty().minimumLength(10) with filled array with less than 10 items', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').minimumLength(10);
 
@@ -241,7 +241,7 @@ test('arrayProperty().minimumLength(10) with filled array with less than 10 item
     expect(result.failures).toHaveLength(1);
 });
 test('arrayProperty().minimumLength(10) with filled array with 10 items', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').minimumLength(10);
 
@@ -253,7 +253,7 @@ test('arrayProperty().minimumLength(10) with filled array with 10 items', () => 
     expect(result.failures).toHaveLength(0);
 });
 test('arrayProperty().minimumLength(10) with empty array', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').minimumLength(10);
 
@@ -265,7 +265,7 @@ test('arrayProperty().minimumLength(10) with empty array', () => {
     expect(result.failures).toHaveLength(1);
 });
 test('arrayProperty().notEmpty() with undefined value', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').notEmpty();
 
@@ -277,7 +277,7 @@ test('arrayProperty().notEmpty() with undefined value', () => {
     expect(result.failures).toHaveLength(1);
 });
 test('arrayProperty().notEmpty() with null value', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').notEmpty();
 
@@ -289,7 +289,7 @@ test('arrayProperty().notEmpty() with null value', () => {
     expect(result.failures).toHaveLength(1);
 });
 test('arrayProperty().notEmpty() with filled array', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').notEmpty();
 
@@ -301,7 +301,7 @@ test('arrayProperty().notEmpty() with filled array', () => {
     expect(result.failures).toHaveLength(0);
 });
 test('arrayProperty().notEmpty() with empty array', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.arrayProperty('test').notEmpty();
 

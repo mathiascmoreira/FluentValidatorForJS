@@ -1,12 +1,12 @@
 class PropertyValidator {
-    constructor(objectValidator, propertyName, alias, contextName, condition) {
+    constructor(objectValidator, propertyName, alias, contextName, conditions) {
         this._objectValidator = objectValidator;
 
         this._propertyName = propertyName;
         this._alias = alias;
 
         this._contextName = contextName;
-        this._condition = condition;
+        this._conditions = conditions;
 
         this._validations = [];
 
@@ -40,7 +40,7 @@ class PropertyValidator {
     }
 
     validate(object) {
-        if (!this._condition())
+        if (!this._testConditions(object))
             return;
 
         let value = object[this._propertyName];
@@ -54,6 +54,10 @@ class PropertyValidator {
 
     belongsToContexts(contexts) {
         return contexts.some(context => context === this._contextName)
+    }
+
+    propertyDescription() {
+        return this._alias || this._propertyName;
     }
 
     _addValidation(rule, message) {
@@ -70,24 +74,10 @@ class PropertyValidator {
         this._validations.push(validation);
     }
 
-    // _emptyOrWhitespaceString(value) {
-    //     return typeof(value) === 'string' && !/\S/.test(value) 
-    // }
-
-    // _emptyArray(value) {
-    //     return Array.isArray(value) && value.length == 0;
-    // }
-
-    // _null(value) {
-    //     return value === null;
-    // }
-
-    // _undefined(value) {
-    //     return value === undefined;
-    // }
-
-    propertyDescription() {
-        return this._alias || this._propertyName;
+    _testConditions(object) {
+        return this._conditions.every(condition => {
+           return condition(object);
+        })
     }
 }
 

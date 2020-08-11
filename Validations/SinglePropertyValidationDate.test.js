@@ -1,7 +1,7 @@
-const ObjectValidation = require('../src/ObjectValidator');
+const ObjectValidator = require('../src/ObjectValidator');
 
 test('dateProperty().greaterThenOrEqualsTo(new Date(2020, 5, 6)) with a null value', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .dateProperty('test').greaterThenOrEqualsTo(new Date(2020, 5, 6))
@@ -15,7 +15,7 @@ test('dateProperty().greaterThenOrEqualsTo(new Date(2020, 5, 6)) with a null val
 })
 
 test('dateProperty().greaterThenOrEqualsTo(new Date(2020, 5, 6)) with an undefined value', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .dateProperty('test').greaterThenOrEqualsTo(new Date(2020, 5, 6))
@@ -28,7 +28,7 @@ test('dateProperty().greaterThenOrEqualsTo(new Date(2020, 5, 6)) with an undefin
     expect(result.failures).toHaveLength(1);
 })
 test('dateProperty().greaterThenOrEqualsTo(new Date(2020, 5, 6)) with a date value greater than the date to compare', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .dateProperty('test').greaterThenOrEqualsTo(new Date(2020, 5, 6))
@@ -41,7 +41,7 @@ test('dateProperty().greaterThenOrEqualsTo(new Date(2020, 5, 6)) with a date val
     expect(result.failures).toHaveLength(0);
 })
 test('dateProperty().greaterThenOrEqualsTo(new Date(2020, 5, 6)) with a date value less than the date to compare', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .dateProperty('test').greaterThenOrEqualsTo(new Date(2020, 5, 6))
@@ -54,7 +54,7 @@ test('dateProperty().greaterThenOrEqualsTo(new Date(2020, 5, 6)) with a date val
     expect(result.failures).toHaveLength(1);
 })
 test('dateProperty().greaterThenOrEqualsTo(new Date(2020, 5, 6)) with a date value equals to the date to compare', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .dateProperty('test').greaterThenOrEqualsTo(new Date(2020, 5, 6))
@@ -67,7 +67,7 @@ test('dateProperty().greaterThenOrEqualsTo(new Date(2020, 5, 6)) with a date val
     expect(result.failures).toHaveLength(0);
 })
 test('dateProperty().between(new Date(2020, 5, 1), new Date(2020, 5, 30)) with null value', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .dateProperty('test')
@@ -81,7 +81,7 @@ test('dateProperty().between(new Date(2020, 5, 1), new Date(2020, 5, 30)) with n
     expect(result.failures).toHaveLength(1);
 })
 test('dateProperty().between(new Date(2020, 5, 1), new Date(2020, 5, 30)) with undefined value', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .dateProperty('test')
@@ -95,7 +95,7 @@ test('dateProperty().between(new Date(2020, 5, 1), new Date(2020, 5, 30)) with u
     expect(result.failures).toHaveLength(1);
 })
 test('dateProperty().between(new Date(2020, 5, 1), new Date(2020, 5, 30)) with value before the interval', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .dateProperty('test')
@@ -109,7 +109,7 @@ test('dateProperty().between(new Date(2020, 5, 1), new Date(2020, 5, 30)) with v
     expect(result.failures).toHaveLength(1);
 })
 test('dateProperty().between(new Date(2020, 5, 1), new Date(2020, 5, 30)) with value after the interval', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .dateProperty('test')
@@ -123,7 +123,7 @@ test('dateProperty().between(new Date(2020, 5, 1), new Date(2020, 5, 30)) with v
     expect(result.failures).toHaveLength(1);
 })
 test('dateProperty().between(new Date(2020, 5, 1), new Date(2020, 5, 30)) with value equals to min date', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .dateProperty('test')
@@ -137,7 +137,7 @@ test('dateProperty().between(new Date(2020, 5, 1), new Date(2020, 5, 30)) with v
     expect(result.failures).toHaveLength(0);
 })
 test('dateProperty().between(new Date(2020, 5, 1), new Date(2020, 5, 30)) with value equals to max date', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .dateProperty('test')
@@ -151,7 +151,7 @@ test('dateProperty().between(new Date(2020, 5, 1), new Date(2020, 5, 30)) with v
     expect(result.failures).toHaveLength(0);
 })
 test('dateProperty().between(new Date(2020, 5, 1), new Date(2020, 5, 30)) with value within the interval', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .dateProperty('test')
@@ -165,7 +165,7 @@ test('dateProperty().between(new Date(2020, 5, 1), new Date(2020, 5, 30)) with v
     expect(result.failures).toHaveLength(0);
 })
 test('dateProperty().lessThenOrEqualsTo(new Date(2020, 5, 6)) with a null value', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .dateProperty('test').lessThenOrEqualsTo(new Date(2020, 5, 6))
@@ -179,7 +179,7 @@ test('dateProperty().lessThenOrEqualsTo(new Date(2020, 5, 6)) with a null value'
 })
 
 test('dateProperty().lessThenOrEqualsTo(new Date(2020, 5, 6)) with an undefined value', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .dateProperty('test').lessThenOrEqualsTo(new Date(2020, 5, 6))
@@ -192,7 +192,7 @@ test('dateProperty().lessThenOrEqualsTo(new Date(2020, 5, 6)) with an undefined 
     expect(result.failures).toHaveLength(0);
 })
 test('dateProperty().lessThenOrEqualsTo(new Date(2020, 5, 6)) with a date value greater than the date to compare', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .dateProperty('test').lessThenOrEqualsTo(new Date(2020, 5, 6))
@@ -205,7 +205,7 @@ test('dateProperty().lessThenOrEqualsTo(new Date(2020, 5, 6)) with a date value 
     expect(result.failures).toHaveLength(1);
 })
 test('dateProperty().lessThenOrEqualsTo(new Date(2020, 5, 6)) with a date value less than the date to compare', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .dateProperty('test').lessThenOrEqualsTo(new Date(2020, 5, 6))
@@ -218,7 +218,7 @@ test('dateProperty().lessThenOrEqualsTo(new Date(2020, 5, 6)) with a date value 
     expect(result.failures).toHaveLength(0);
 })
 test('dateProperty().lessThenOrEqualsTo(new Date(2020, 5, 6)) with a date value equals to the date to compare', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .dateProperty('test').lessThenOrEqualsTo(new Date(2020, 5, 6))

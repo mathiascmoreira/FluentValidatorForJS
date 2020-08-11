@@ -12,7 +12,10 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\FluentValidator.js"
+            "program": "${workspaceFolder}\\src\\FluentValidator.js",
+            "env": {
+                "DEBUG": null
+            }
         }
     ]
 }

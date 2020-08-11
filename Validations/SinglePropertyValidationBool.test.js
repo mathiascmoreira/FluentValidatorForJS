@@ -1,7 +1,7 @@
-const ObjectValidation = require('../src/ObjectValidator');
+const ObjectValidator = require('../src/ObjectValidator');
 
 test('booleanProperty().mustBeFalse() with true value', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.booleanProperty('test').mustBeFalse();
 
@@ -13,7 +13,7 @@ test('booleanProperty().mustBeFalse() with true value', () => {
     expect(result.failures).toHaveLength(1);
 });
 test('booleanProperty().mustBeFalse() with false value', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.booleanProperty('test').mustBeFalse();
 
@@ -25,7 +25,7 @@ test('booleanProperty().mustBeFalse() with false value', () => {
     expect(result.failures).toHaveLength(0);
 });
 test('booleanProperty().mustBeFalse() with truthy values', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .booleanProperty('test1').mustBeFalse()
@@ -55,7 +55,7 @@ test('booleanProperty().mustBeFalse() with truthy values', () => {
     expect(result.failures).toHaveLength(8);
 });
 test('booleanProperty().mustBeFalse() with falsy values', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .booleanProperty('test1').mustBeFalse()
@@ -81,7 +81,7 @@ test('booleanProperty().mustBeFalse() with falsy values', () => {
     expect(result.failures).toHaveLength(8);
 });
 test('booleanProperty().mustBeFalsy() with truthy values', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .booleanProperty('test1').mustBeFalsy()
@@ -112,7 +112,7 @@ test('booleanProperty().mustBeFalsy() with truthy values', () => {
     expect(result.failures).toHaveLength(9);
 });
 test('booleanProperty().mustBeFalsy() with falsy values', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .booleanProperty('test1').mustBeFalsy()
@@ -140,7 +140,7 @@ test('booleanProperty().mustBeFalsy() with falsy values', () => {
     expect(result.failures).toHaveLength(0);
 });
 test('booleanProperty().mustBeTrue() with true value', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.booleanProperty('test').mustBeTrue();
 
@@ -152,7 +152,7 @@ test('booleanProperty().mustBeTrue() with true value', () => {
     expect(result.failures).toHaveLength(0);
 });
 test('booleanProperty().mustBeTrue() with false value', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator.booleanProperty('test').mustBeTrue();
 
@@ -164,7 +164,7 @@ test('booleanProperty().mustBeTrue() with false value', () => {
     expect(result.failures).toHaveLength(1);
 });
 test('booleanProperty().mustBeTrue() with truthy values', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .booleanProperty('test1').mustBeTrue()
@@ -193,7 +193,7 @@ test('booleanProperty().mustBeTrue() with truthy values', () => {
     expect(result.failures).toHaveLength(8);
 });
 test('booleanProperty().mustBeTrue() with falsy values', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .booleanProperty('test1').mustBeTrue()
@@ -219,7 +219,7 @@ test('booleanProperty().mustBeTrue() with falsy values', () => {
     expect(result.failures).toHaveLength(8);
 });
 test('booleanProperty().mustBeTruthy() with truthy values', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .booleanProperty('test1').mustBeTruthy()
@@ -250,7 +250,7 @@ test('booleanProperty().mustBeTruthy() with truthy values', () => {
     expect(result.failures).toHaveLength(0);
 });
 test('booleanProperty().mustBeTruthy() with falsy values', () => {
-    let validator = new ObjectValidation();
+    let validator = new ObjectValidator();
 
     validator
         .booleanProperty('test1').mustBeTruthy()
