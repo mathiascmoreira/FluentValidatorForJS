@@ -53,6 +53,7 @@ class ObjectValidator {
     }
     onlyFirstError() {
         this._onlyFirstError = true;
+        return this;
     }
     context(contextName, rules) {
         this._contextName = contextName;
