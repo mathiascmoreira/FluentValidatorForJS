@@ -7,9 +7,7 @@ const StringValidations = require('./StringValidations');
 class ObjectValidator {
     constructor() {
         this._context = '';
-        this._conditions = [];
-
-        this._validationResult = this._validationSuccess();
+        this._conditions = [];        
         
         this._onlyFirstError = false;
 
@@ -56,24 +54,27 @@ class ObjectValidator {
         return this;
     }
     context(contextName, rules) {
-        this._contextName = contextName;
+        this._context = contextName;
         rules();
-        this._contextName = '';
+        this._context = '';
+        return this;
     }
     condition(condition, rules) {
         this._conditions.push(condition);
         rules();
         this._conditions.pop();
+        return this;
     }
     addFailure(failure) {
         this._validationResult.failures.push(failure);
         this._validationResult.isValid = false;
     }
-
     hasFailures() {
         return !this._validationResult.isValid;
     }
     validate(object, contexts) {
+        this._validationResult = this._validationSuccess();
+        
         contexts = contexts ? contexts : [''];
 
         let propertyValidations = this._validations
