@@ -1,10 +1,38 @@
 const ObjectValidator = require('../src/ObjectValidator');
 
-test('numberProperty().exclusiveBetween(10, 20) with null value', () => { 
+test('ensure type for Number', () => {
+    let validator = new ObjectValidator();
+
+    validator.number('test1')
+        .number('test2')
+        .number('test3')
+        .number('test4')
+        .number('test5');
+
+    let result = validator.validate({
+        test1: 10,
+        test2: null
+    });
+
+    expect(result.isValid).toBe(true);
+    expect(result.failures).toHaveLength(0);
+
+    result = validator.validate({
+        test1: 'test',
+        test2: new Date(),
+        test3: true,
+        test4: { test: 2 },
+        test5: [1, 2, 3]
+    });
+
+    expect(result.isValid).toBe(false);
+    expect(result.failures).toHaveLength(5);
+});
+test('number().exclusiveBetween(10, 20) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .exclusiveBetween(10, 20);
 
     let result = validator.validate({
@@ -14,11 +42,11 @@ test('numberProperty().exclusiveBetween(10, 20) with null value', () => {
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().exclusiveBetween(0, 20) with null value', () => { 
+test('number().exclusiveBetween(0, 20) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .exclusiveBetween(0, 20);
 
     let result = validator.validate({
@@ -28,11 +56,11 @@ test('numberProperty().exclusiveBetween(0, 20) with null value', () => {
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().exclusiveBetween(-10, 20) with null value', () => { 
+test('number().exclusiveBetween(-10, 20) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .exclusiveBetween(-10, 20);
 
     let result = validator.validate({
@@ -42,11 +70,11 @@ test('numberProperty().exclusiveBetween(-10, 20) with null value', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('numberProperty().exclusiveBetween(10, 20) with undefined value', () => { 
+test('number().exclusiveBetween(10, 20) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .exclusiveBetween(10, 20);
 
     let result = validator.validate({
@@ -56,11 +84,11 @@ test('numberProperty().exclusiveBetween(10, 20) with undefined value', () => {
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().exclusiveBetween(0, 20) with undefined value', () => { 
+test('number().exclusiveBetween(0, 20) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .exclusiveBetween(0, 20);
 
     let result = validator.validate({
@@ -70,11 +98,11 @@ test('numberProperty().exclusiveBetween(0, 20) with undefined value', () => {
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().exclusiveBetween(-10, 20) with undefined value', () => { 
+test('number().exclusiveBetween(-10, 20) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .exclusiveBetween(-10, 20);
 
     let result = validator.validate({
@@ -84,11 +112,11 @@ test('numberProperty().exclusiveBetween(-10, 20) with undefined value', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('numberProperty().exclusiveBetween(10, 20) with value after the interval', () => { 
+test('number().exclusiveBetween(10, 20) with value after the interval', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .exclusiveBetween(10, 20);
 
     let result = validator.validate({
@@ -98,11 +126,11 @@ test('numberProperty().exclusiveBetween(10, 20) with value after the interval', 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().exclusiveBetween(10, 20) with value before the interval', () => { 
+test('number().exclusiveBetween(10, 20) with value before the interval', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .exclusiveBetween(10, 20);
 
     let result = validator.validate({
@@ -112,11 +140,11 @@ test('numberProperty().exclusiveBetween(10, 20) with value before the interval',
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().exclusiveBetween(10, 20) with value equals to min number', () => { 
+test('number().exclusiveBetween(10, 20) with value equals to min number', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .exclusiveBetween(10, 20);
 
     let result = validator.validate({
@@ -126,11 +154,11 @@ test('numberProperty().exclusiveBetween(10, 20) with value equals to min number'
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().exclusiveBetween(10, 20) with value equals to max number', () => { 
+test('number().exclusiveBetween(10, 20) with value equals to max number', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .exclusiveBetween(10, 20);
 
     let result = validator.validate({
@@ -140,11 +168,11 @@ test('numberProperty().exclusiveBetween(10, 20) with value equals to max number'
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().exclusiveBetween(10, 20) with value within the interval', () => { 
+test('number().exclusiveBetween(10, 20) with value within the interval', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .exclusiveBetween(10, 20);
 
     let result = validator.validate({
@@ -154,11 +182,11 @@ test('numberProperty().exclusiveBetween(10, 20) with value within the interval',
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('numberProperty().greaterThen(10) with null value', () => { 
+test('number().greaterThen(10) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .greaterThen(10);
 
     let result = validator.validate({
@@ -168,11 +196,11 @@ test('numberProperty().greaterThen(10) with null value', () => {
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().greaterThen(0) with null value', () => { 
+test('number().greaterThen(0) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .greaterThen(0);
 
     let result = validator.validate({
@@ -182,11 +210,11 @@ test('numberProperty().greaterThen(0) with null value', () => {
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().greaterThen(-10) with null value', () => { 
+test('number().greaterThen(-10) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .greaterThen(-10);
 
     let result = validator.validate({
@@ -196,11 +224,11 @@ test('numberProperty().greaterThen(-10) with null value', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('numberProperty().greaterThen(10) with undefined value', () => {
+test('number().greaterThen(10) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .greaterThen(10);
 
     let result = validator.validate({
@@ -209,12 +237,12 @@ test('numberProperty().greaterThen(10) with undefined value', () => {
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
- });
- test('numberProperty().greaterThen(0) with undefined value', () => {
+});
+test('number().greaterThen(0) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .greaterThen(0);
 
     let result = validator.validate({
@@ -223,12 +251,12 @@ test('numberProperty().greaterThen(10) with undefined value', () => {
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
- });
- test('numberProperty().greaterThen(-10) with undefined value', () => {
+});
+test('number().greaterThen(-10) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .greaterThen(-10);
 
     let result = validator.validate({
@@ -237,12 +265,12 @@ test('numberProperty().greaterThen(10) with undefined value', () => {
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
- });
-test('numberProperty().greaterThen(10) with value greater than the value to compare', () => { 
+});
+test('number().greaterThen(10) with value greater than the value to compare', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .greaterThen(10);
 
     let result = validator.validate({
@@ -252,11 +280,11 @@ test('numberProperty().greaterThen(10) with value greater than the value to comp
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('numberProperty().greaterThen(10) with value less than the value to compare', () => { 
+test('number().greaterThen(10) with value less than the value to compare', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .greaterThen(10);
 
     let result = validator.validate({
@@ -266,11 +294,11 @@ test('numberProperty().greaterThen(10) with value less than the value to compare
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().greaterThen(10) with value equals to the value to compare', () => { 
+test('number().greaterThen(10) with value equals to the value to compare', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .greaterThen(10);
 
     let result = validator.validate({
@@ -280,11 +308,11 @@ test('numberProperty().greaterThen(10) with value equals to the value to compare
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().greaterThenOrEqualsTo(10) with null value', () => { 
+test('number().greaterThenOrEqualsTo(10) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .greaterThenOrEqualsTo(10);
 
     let result = validator.validate({
@@ -294,11 +322,11 @@ test('numberProperty().greaterThenOrEqualsTo(10) with null value', () => {
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().greaterThenOrEqualsTo(0) with null value', () => { 
+test('number().greaterThenOrEqualsTo(0) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .greaterThenOrEqualsTo(0);
 
     let result = validator.validate({
@@ -308,11 +336,11 @@ test('numberProperty().greaterThenOrEqualsTo(0) with null value', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('numberProperty().greaterThenOrEqualsTo(-10) with null value', () => { 
+test('number().greaterThenOrEqualsTo(-10) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .greaterThenOrEqualsTo(-10);
 
     let result = validator.validate({
@@ -322,11 +350,11 @@ test('numberProperty().greaterThenOrEqualsTo(-10) with null value', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('numberProperty().greaterThenOrEqualsTo(10) with undefined value', () => {
+test('number().greaterThenOrEqualsTo(10) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .greaterThenOrEqualsTo(10);
 
     let result = validator.validate({
@@ -335,12 +363,12 @@ test('numberProperty().greaterThenOrEqualsTo(10) with undefined value', () => {
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
- });
- test('numberProperty().greaterThenOrEqualsTo(0) with undefined value', () => {
+});
+test('number().greaterThenOrEqualsTo(0) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .greaterThenOrEqualsTo(0);
 
     let result = validator.validate({
@@ -349,12 +377,12 @@ test('numberProperty().greaterThenOrEqualsTo(10) with undefined value', () => {
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
- });
- test('numberProperty().greaterThenOrEqualsTo(-10) with undefined value', () => {
+});
+test('number().greaterThenOrEqualsTo(-10) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .greaterThenOrEqualsTo(-10);
 
     let result = validator.validate({
@@ -363,12 +391,12 @@ test('numberProperty().greaterThenOrEqualsTo(10) with undefined value', () => {
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
- });
-test('numberProperty().greaterThenOrEqualsTo(10) with value greater than the value to compare', () => { 
+});
+test('number().greaterThenOrEqualsTo(10) with value greater than the value to compare', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .greaterThenOrEqualsTo(10);
 
     let result = validator.validate({
@@ -378,11 +406,11 @@ test('numberProperty().greaterThenOrEqualsTo(10) with value greater than the val
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('numberProperty().greaterThenOrEqualsTo(10) with value less than the value to compare', () => { 
+test('number().greaterThenOrEqualsTo(10) with value less than the value to compare', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .greaterThenOrEqualsTo(10);
 
     let result = validator.validate({
@@ -392,11 +420,11 @@ test('numberProperty().greaterThenOrEqualsTo(10) with value less than the value 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().greaterThenOrEqualsTo(10) with value equals to the value to compare', () => { 
+test('number().greaterThenOrEqualsTo(10) with value equals to the value to compare', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .greaterThenOrEqualsTo(10);
 
     let result = validator.validate({
@@ -406,11 +434,11 @@ test('numberProperty().greaterThenOrEqualsTo(10) with value equals to the value 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('numberProperty().inclusiveBetween(10, 20) with null value', () => { 
+test('number().inclusiveBetween(10, 20) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .inclusiveBetween(10, 20);
 
     let result = validator.validate({
@@ -420,11 +448,11 @@ test('numberProperty().inclusiveBetween(10, 20) with null value', () => {
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().inclusiveBetween(0, 20) with null value', () => { 
+test('number().inclusiveBetween(0, 20) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .inclusiveBetween(0, 20);
 
     let result = validator.validate({
@@ -434,11 +462,11 @@ test('numberProperty().inclusiveBetween(0, 20) with null value', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('numberProperty().inclusiveBetween(-10, 20) with null value', () => { 
+test('number().inclusiveBetween(-10, 20) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .inclusiveBetween(-10, 20);
 
     let result = validator.validate({
@@ -448,11 +476,11 @@ test('numberProperty().inclusiveBetween(-10, 20) with null value', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('numberProperty().inclusiveBetween(10, 20) with undefined value', () => { 
+test('number().inclusiveBetween(10, 20) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .inclusiveBetween(10, 20);
 
     let result = validator.validate({
@@ -462,11 +490,11 @@ test('numberProperty().inclusiveBetween(10, 20) with undefined value', () => {
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().inclusiveBetween(0, 20) with undefined value', () => { 
+test('number().inclusiveBetween(0, 20) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .inclusiveBetween(0, 20);
 
     let result = validator.validate({
@@ -476,11 +504,11 @@ test('numberProperty().inclusiveBetween(0, 20) with undefined value', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('numberProperty().inclusiveBetween(-10, 20) with undefined value', () => { 
+test('number().inclusiveBetween(-10, 20) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .inclusiveBetween(-10, 20);
 
     let result = validator.validate({
@@ -490,11 +518,11 @@ test('numberProperty().inclusiveBetween(-10, 20) with undefined value', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('numberProperty().inclusiveBetween(10, 20) with value after the interval', () => { 
+test('number().inclusiveBetween(10, 20) with value after the interval', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .inclusiveBetween(10, 20);
 
     let result = validator.validate({
@@ -504,11 +532,11 @@ test('numberProperty().inclusiveBetween(10, 20) with value after the interval', 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().inclusiveBetween(10, 20) with value before the interval', () => { 
+test('number().inclusiveBetween(10, 20) with value before the interval', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .inclusiveBetween(10, 20);
 
     let result = validator.validate({
@@ -518,11 +546,11 @@ test('numberProperty().inclusiveBetween(10, 20) with value before the interval',
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().inclusiveBetween(10, 20) with value equals to min number', () => { 
+test('number().inclusiveBetween(10, 20) with value equals to min number', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .inclusiveBetween(10, 20);
 
     let result = validator.validate({
@@ -532,11 +560,11 @@ test('numberProperty().inclusiveBetween(10, 20) with value equals to min number'
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('numberProperty().inclusiveBetween(10, 20) with value equals to max number', () => { 
+test('number().inclusiveBetween(10, 20) with value equals to max number', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .inclusiveBetween(10, 20);
 
     let result = validator.validate({
@@ -546,11 +574,11 @@ test('numberProperty().inclusiveBetween(10, 20) with value equals to max number'
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('numberProperty().inclusiveBetween(10, 20) with value within the interval', () => { 
+test('number().inclusiveBetween(10, 20) with value within the interval', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .inclusiveBetween(10, 20);
 
     let result = validator.validate({
@@ -560,11 +588,11 @@ test('numberProperty().inclusiveBetween(10, 20) with value within the interval',
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('numberProperty().lessThen(10) with null value', () => { 
+test('number().lessThen(10) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .lessThen(10);
 
     let result = validator.validate({
@@ -574,11 +602,11 @@ test('numberProperty().lessThen(10) with null value', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('numberProperty().lessThen(0) with null value', () => { 
+test('number().lessThen(0) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .lessThen(0);
 
     let result = validator.validate({
@@ -588,11 +616,11 @@ test('numberProperty().lessThen(0) with null value', () => {
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().lessThen(-10) with null value', () => { 
+test('number().lessThen(-10) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .lessThen(-10);
 
     let result = validator.validate({
@@ -602,11 +630,11 @@ test('numberProperty().lessThen(-10) with null value', () => {
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().lessThen(10) with undefined value', () => {
+test('number().lessThen(10) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .lessThen(10);
 
     let result = validator.validate({
@@ -615,12 +643,12 @@ test('numberProperty().lessThen(10) with undefined value', () => {
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
- });
- test('numberProperty().lessThen(0) with undefined value', () => {
+});
+test('number().lessThen(0) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .lessThen(0);
 
     let result = validator.validate({
@@ -629,12 +657,12 @@ test('numberProperty().lessThen(10) with undefined value', () => {
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
- });
- test('numberProperty().lessThen(-10) with undefined value', () => {
+});
+test('number().lessThen(-10) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .lessThen(-10);
 
     let result = validator.validate({
@@ -643,12 +671,12 @@ test('numberProperty().lessThen(10) with undefined value', () => {
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
- });
-test('numberProperty().lessThen(10) with value greater than the value to compare', () => { 
+});
+test('number().lessThen(10) with value greater than the value to compare', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .lessThen(10);
 
     let result = validator.validate({
@@ -658,11 +686,11 @@ test('numberProperty().lessThen(10) with value greater than the value to compare
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().lessThen(10) with value less than the value to compare', () => { 
+test('number().lessThen(10) with value less than the value to compare', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .lessThen(10);
 
     let result = validator.validate({
@@ -672,11 +700,11 @@ test('numberProperty().lessThen(10) with value less than the value to compare', 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('numberProperty().lessThen(10) with value equals to the value to compare', () => { 
+test('number().lessThen(10) with value equals to the value to compare', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .lessThen(10);
 
     let result = validator.validate({
@@ -686,11 +714,11 @@ test('numberProperty().lessThen(10) with value equals to the value to compare', 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().lessThenOrEqualsTo(10) with null value', () => { 
+test('number().lessThenOrEqualsTo(10) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .lessThenOrEqualsTo(10);
 
     let result = validator.validate({
@@ -700,11 +728,11 @@ test('numberProperty().lessThenOrEqualsTo(10) with null value', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('numberProperty().lessThenOrEqualsTo(0) with null value', () => { 
+test('number().lessThenOrEqualsTo(0) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .lessThenOrEqualsTo(0);
 
     let result = validator.validate({
@@ -714,11 +742,11 @@ test('numberProperty().lessThenOrEqualsTo(0) with null value', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('numberProperty().lessThenOrEqualsTo(-10) with null value', () => { 
+test('number().lessThenOrEqualsTo(-10) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .lessThenOrEqualsTo(-10);
 
     let result = validator.validate({
@@ -728,11 +756,11 @@ test('numberProperty().lessThenOrEqualsTo(-10) with null value', () => {
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().lessThenOrEqualsTo(10) with undefined value', () => {
+test('number().lessThenOrEqualsTo(10) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .lessThenOrEqualsTo(10);
 
     let result = validator.validate({
@@ -741,12 +769,12 @@ test('numberProperty().lessThenOrEqualsTo(10) with undefined value', () => {
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
- });
- test('numberProperty().lessThenOrEqualsTo(0) with undefined value', () => {
+});
+test('number().lessThenOrEqualsTo(0) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .lessThenOrEqualsTo(0);
 
     let result = validator.validate({
@@ -755,12 +783,12 @@ test('numberProperty().lessThenOrEqualsTo(10) with undefined value', () => {
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
- });
- test('numberProperty().lessThenOrEqualsTo(-10) with undefined value', () => {
+});
+test('number().lessThenOrEqualsTo(-10) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .lessThenOrEqualsTo(-10);
 
     let result = validator.validate({
@@ -769,12 +797,12 @@ test('numberProperty().lessThenOrEqualsTo(10) with undefined value', () => {
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
- });
-test('numberProperty().lessThenOrEqualsTo(10) with value greater than the value to compare', () => { 
+});
+test('number().lessThenOrEqualsTo(10) with value greater than the value to compare', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .lessThenOrEqualsTo(10);
 
     let result = validator.validate({
@@ -784,11 +812,11 @@ test('numberProperty().lessThenOrEqualsTo(10) with value greater than the value 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('numberProperty().lessThenOrEqualsTo(10) with value less than the value to compare', () => { 
+test('number().lessThenOrEqualsTo(10) with value less than the value to compare', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .lessThenOrEqualsTo(10);
 
     let result = validator.validate({
@@ -798,11 +826,11 @@ test('numberProperty().lessThenOrEqualsTo(10) with value less than the value to 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('numberProperty().lessThenOrEqualsTo(10) with value equals to the value to compare', () => { 
+test('number().lessThenOrEqualsTo(10) with value equals to the value to compare', () => {
     let validator = new ObjectValidator();
 
     validator
-        .numberProperty('test')
+        .number('test')
         .lessThenOrEqualsTo(10);
 
     let result = validator.validate({

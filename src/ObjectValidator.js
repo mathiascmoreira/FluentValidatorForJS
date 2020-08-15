@@ -1,100 +1,81 @@
-const ArrayValidations = require('./ArrayValidations');
-const BooleanValidations = require('./BooleanValidations');
-const DateValidations = require('./DateValidations');
-const NumberValidations = require('./NumberValidations');
-const StringValidations = require('./StringValidations');
+const RulesForArrays = require('./RulesForArrays');
+const RulesForBooleans = require('./RulesForBooleans');
+const RulesForDates = require('./RulesForDates');
+const RulesForNumbers = require('./RulesForNumbers');
+const RulesForStrings = require('./RulesForStrings');
 
 class ObjectValidator {
     constructor() {
-        this._context = '';
-        this._conditions = [];        
-        
-        this._onlyFirstError = false;
-
-        this._validations = [];
+        this._contextName = '';
+        this._conditions = [];
+        this._onlyFirstFailure = false;
+        this._propertyRules = [];
     }
 
-    arrayProperty(propertyName, alias) {
-        let validations = new ArrayValidations(this, propertyName, alias, this._context, [...this._conditions]);
-        this._validations.push(validations);
-        return validations;
+    array(propertyName, alias) {
+        return this._addPropertyRule(RulesForArrays, propertyName, alias);
     }
-    boolProperty(propertyName, alias) {
-        let validations = new BooleanValidations(this, propertyName, alias, this._context, [...this._conditions]);
-        this._validations.push(validations);
-        return validations;
+
+    bool(propertyName, alias) {
+        return this._addPropertyRule(RulesForBooleans, propertyName, alias);
     }
-    booleanProperty(propertyName, alias) {
-        let validations = new BooleanValidations(this, propertyName, alias, this._context, [...this._conditions]);
-        this._validations.push(validations);
-        return validations;
+
+    boolean(propertyName, alias) {
+        return this._addPropertyRule(RulesForBooleans, propertyName, alias);
     }
-    dateProperty(propertyName, alias) {
-        let validations = new DateValidations(this, propertyName, alias, this._context, [...this._conditions]);
-        this._validations.push(validations);
-        return validations;
+
+    date(propertyName, alias) {
+        return this._addPropertyRule(RulesForDates, propertyName, alias);
     }
-    numberProperty(propertyName, alias) {
-        let validations = new NumberValidations(this, propertyName, alias, this._context, [...this._conditions]);
-        this._validations.push(validations);
-        return validations;
+
+    number(propertyName, alias) {
+        return this._addPropertyRule(RulesForNumbers, propertyName, alias);
     }
-    objectProperty(propertyName, alias) {
-        // let validations = new ObjectValidations(this, propertyName, alias, this._context, [...this._conditions]);
-        // this._validations.push(validations);
-        // return validations;
+
+    string(propertyName, alias) {
+        return this._addPropertyRule(RulesForStrings, propertyName, alias);
     }
-    stringProperty(propertyName, alias) {
-        let validations = new StringValidations(this, propertyName, alias, this._context, [...this._conditions]);
-        this._validations.push(validations);
-        return validations;
-    }
-    onlyFirstError() {
-        this._onlyFirstError = true;
+
+    onlyFirstFailure() {
+        this._onlyFirstFailure = true;
         return this;
     }
+
     context(contextName, rules) {
-        this._context = contextName;
+        this._contextName = contextName;
         rules();
-        this._context = '';
+        this._contextName = '';
         return this;
     }
+
     condition(condition, rules) {
         this._conditions.push(condition);
         rules();
         this._conditions.pop();
         return this;
     }
-    addFailure(failure) {
-        this._validationResult.failures.push(failure);
-        this._validationResult.isValid = false;
-    }
-    hasFailures() {
-        return !this._validationResult.isValid;
-    }
+
     validate(object, contexts) {
         this._validationResult = this._validationSuccess();
-        
-        contexts = contexts ? contexts : [''];
-
-        let propertyValidations = this._validations
-            .filter(c => c.belongsToContexts(contexts));
-
-        propertyValidations.every(propertyValidation => {
-            propertyValidation.validate(object);
-
-            return !(this._onlyFirstError && this.hasFailures());
+        this._propertyRules.every(propertyRule => {
+            propertyRule.validate(object, contexts);
+            return !this._onlyFirstFailure || this._validationResult.isValid;
         });
-
         return this._validationResult;
     }
+
+    _addPropertyRule(rulesType, propertyName, alias) {
+        let propertyRule = new rulesType(this, propertyName, alias, this._contextName, [...this._conditions]);
+        this._propertyRules.push(propertyRule);
+        return propertyRule;
+    }
+
     _validationSuccess() {
-      return  {
+        return {
             isValid: true,
             failures: []
         };
     }
 }
-
 
 module.exports = ObjectValidator;

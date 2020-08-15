@@ -4,8 +4,8 @@ test('when the condition is NOT met, the validation NOT occurs', () => {
     let validator = new ObjectValidator();
 
     validator.condition(object => object.test1 > 2, () => validator
-        .arrayProperty('test2')
-        .minimumLength(5)); 
+        .array('test2')
+        .minimumLength(5));
 
     let result = validator.validate({
         test1: 1,
@@ -20,7 +20,7 @@ test('when the condition is met, the validation occurs', () => {
     let validator = new ObjectValidator();
 
     validator.condition(object => object.test1 > 2, () => validator
-        .arrayProperty('test2')
+        .array('test2')
         .minimumLength(5));
 
     let result = validator.validate({

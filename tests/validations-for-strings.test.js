@@ -1,10 +1,38 @@
 const ObjectValidator = require('../src/ObjectValidator');
 
-test('stringProperty().empty() with null value', () => {  
+test('ensure type for String', () => {
+    let validator = new ObjectValidator();
+
+    validator.string('test1')
+        .string('test2')
+        .string('test3')
+        .string('test4')
+        .string('test5');
+
+    let result = validator.validate({
+        test1: 'test',
+        test2: null
+    });
+
+    expect(result.isValid).toBe(true);
+    expect(result.failures).toHaveLength(0);
+
+    result = validator.validate({
+        test1: 10,
+        test2: new Date(),
+        test3: true,
+        test4: { test: 2 },
+        test5: [1, 2, 3]
+    });
+
+    expect(result.isValid).toBe(false);
+    expect(result.failures).toHaveLength(5);
+});
+test('string().empty() with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .empty();
 
     let result = validator.validate({
@@ -14,11 +42,11 @@ test('stringProperty().empty() with null value', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('stringProperty().empty() with undefined value', () => { 
+test('string().empty() with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .empty();
 
     let result = validator.validate({
@@ -28,11 +56,11 @@ test('stringProperty().empty() with undefined value', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('stringProperty().empty() with empty string', () => { 
+test('string().empty() with empty string', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .empty()
 
     let result = validator.validate({
@@ -42,11 +70,11 @@ test('stringProperty().empty() with empty string', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('stringProperty().empty() with whitespace string', () => {
+test('string().empty() with whitespace string', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .empty()
 
     let result = validator.validate({
@@ -55,12 +83,12 @@ test('stringProperty().empty() with whitespace string', () => {
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
- });
-test('stringProperty().empty() with filled string', () => { 
+});
+test('string().empty() with filled string', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .empty()
 
     let result = validator.validate({
@@ -70,11 +98,11 @@ test('stringProperty().empty() with filled string', () => {
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('stringProperty().length(10) with null value', () => { 
+test('string().length(10) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .length(10)
 
     let result = validator.validate({
@@ -84,11 +112,11 @@ test('stringProperty().length(10) with null value', () => {
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('stringProperty().length(10) with undefined value', () => {
+test('string().length(10) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .length(10)
 
     let result = validator.validate({
@@ -97,12 +125,12 @@ test('stringProperty().length(10) with undefined value', () => {
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
- });
-test('stringProperty().length(10) with empty string', () => {
+});
+test('string().length(10) with empty string', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .length(10)
 
     let result = validator.validate({
@@ -111,12 +139,12 @@ test('stringProperty().length(10) with empty string', () => {
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
- });
-test('stringProperty().length(10) with whitespace string', () => {
+});
+test('string().length(10) with whitespace string', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .length(10)
 
     let result = validator.validate({
@@ -125,12 +153,12 @@ test('stringProperty().length(10) with whitespace string', () => {
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
- });
-test('stringProperty().length(0) with null value', () => { 
+});
+test('string().length(0) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .length(0)
 
     let result = validator.validate({
@@ -140,11 +168,11 @@ test('stringProperty().length(0) with null value', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('stringProperty().length(0) with undefined value', () => { 
+test('string().length(0) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .length(0)
 
     let result = validator.validate({
@@ -154,11 +182,11 @@ test('stringProperty().length(0) with undefined value', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('stringProperty().length(0) with empty string', () => { 
+test('string().length(0) with empty string', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .length(0)
 
     let result = validator.validate({
@@ -168,11 +196,11 @@ test('stringProperty().length(0) with empty string', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('stringProperty().length(0) with whitespace string', () => {
+test('string().length(0) with whitespace string', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .length(0)
 
     let result = validator.validate({
@@ -181,12 +209,12 @@ test('stringProperty().length(0) with whitespace string', () => {
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
- });
-test('stringProperty().length(10) with string length greater than the value to compare', () => { 
+});
+test('string().length(10) with string length greater than the value to compare', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .length(10)
 
     let result = validator.validate({
@@ -196,11 +224,11 @@ test('stringProperty().length(10) with string length greater than the value to c
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('stringProperty().length(10) with string length less than the value to compare', () => { 
+test('string().length(10) with string length less than the value to compare', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .length(10)
 
     let result = validator.validate({
@@ -210,11 +238,11 @@ test('stringProperty().length(10) with string length less than the value to comp
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('stringProperty().length(10) with string length equals to the value to compare', () => { 
+test('string().length(10) with string length equals to the value to compare', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .length(10)
 
     let result = validator.validate({
@@ -224,11 +252,11 @@ test('stringProperty().length(10) with string length equals to the value to comp
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('stringProperty().maximumLength(10) with null value', () => { 
+test('string().maximumLength(10) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .maximumLength(10);
 
     let result = validator.validate({
@@ -238,11 +266,11 @@ test('stringProperty().maximumLength(10) with null value', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('stringProperty().maximumLength(10) with undefined value', () => {
+test('string().maximumLength(10) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .maximumLength(10);
 
     let result = validator.validate({
@@ -251,12 +279,12 @@ test('stringProperty().maximumLength(10) with undefined value', () => {
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
- });
-test('stringProperty().maximumLength(10) with empty string', () => {
+});
+test('string().maximumLength(10) with empty string', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .maximumLength(10);
 
     let result = validator.validate({
@@ -265,12 +293,12 @@ test('stringProperty().maximumLength(10) with empty string', () => {
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
- });
-test('stringProperty().maximumLength(10) with whitespace string', () => { 
+});
+test('string().maximumLength(10) with whitespace string', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .maximumLength(10);
 
     let result = validator.validate({
@@ -280,11 +308,11 @@ test('stringProperty().maximumLength(10) with whitespace string', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('stringProperty().maximumLength(0) with null value', () => { 
+test('string().maximumLength(0) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .maximumLength(0);
 
     let result = validator.validate({
@@ -294,11 +322,11 @@ test('stringProperty().maximumLength(0) with null value', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('stringProperty().maximumLength(0) with undefined value', () => { 
+test('string().maximumLength(0) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .maximumLength(0);
 
     let result = validator.validate({
@@ -308,11 +336,11 @@ test('stringProperty().maximumLength(0) with undefined value', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('stringProperty().maximumLength(0) with empty string', () => { 
+test('string().maximumLength(0) with empty string', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .maximumLength(0);
 
     let result = validator.validate({
@@ -322,11 +350,11 @@ test('stringProperty().maximumLength(0) with empty string', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('stringProperty().maximumLength(0) with whitespace string', () => { 
+test('string().maximumLength(0) with whitespace string', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .maximumLength(0);
 
     let result = validator.validate({
@@ -336,11 +364,11 @@ test('stringProperty().maximumLength(0) with whitespace string', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('stringProperty().maximumLength(10) with string length greater than the value to compare', () => { 
+test('string().maximumLength(10) with string length greater than the value to compare', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .maximumLength(10);
 
     let result = validator.validate({
@@ -350,11 +378,11 @@ test('stringProperty().maximumLength(10) with string length greater than the val
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('stringProperty().maximumLength(10) with string length less than the value to compare', () => { 
+test('string().maximumLength(10) with string length less than the value to compare', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .maximumLength(10);
 
     let result = validator.validate({
@@ -364,11 +392,11 @@ test('stringProperty().maximumLength(10) with string length less than the value 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('stringProperty().maximumLength(10) with string length equals to the value to compare', () => {
+test('string().maximumLength(10) with string length equals to the value to compare', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .maximumLength(10);
 
     let result = validator.validate({
@@ -377,12 +405,12 @@ test('stringProperty().maximumLength(10) with string length equals to the value 
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
- });
- test('stringProperty().minimumLength(10) with null value', () => { 
+});
+test('string().minimumLength(10) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .minimumLength(10);
 
     let result = validator.validate({
@@ -392,11 +420,11 @@ test('stringProperty().maximumLength(10) with string length equals to the value 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('stringProperty().minimumLength(10) with undefined value', () => {
+test('string().minimumLength(10) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .minimumLength(10);
 
     let result = validator.validate({
@@ -405,12 +433,12 @@ test('stringProperty().minimumLength(10) with undefined value', () => {
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
- });
-test('stringProperty().minimumLength(10) with empty string', () => {
+});
+test('string().minimumLength(10) with empty string', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .minimumLength(10);
 
     let result = validator.validate({
@@ -419,12 +447,12 @@ test('stringProperty().minimumLength(10) with empty string', () => {
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
- });
-test('stringProperty().minimumLength(10) with whitespace string', () => { 
+});
+test('string().minimumLength(10) with whitespace string', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .minimumLength(10);
 
     let result = validator.validate({
@@ -434,11 +462,11 @@ test('stringProperty().minimumLength(10) with whitespace string', () => {
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('stringProperty().minimumLength(0) with null value', () => { 
+test('string().minimumLength(0) with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .minimumLength(0);
 
     let result = validator.validate({
@@ -448,11 +476,11 @@ test('stringProperty().minimumLength(0) with null value', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('stringProperty().minimumLength(0) with undefined value', () => { 
+test('string().minimumLength(0) with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .minimumLength(0);
 
     let result = validator.validate({
@@ -462,11 +490,11 @@ test('stringProperty().minimumLength(0) with undefined value', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('stringProperty().minimumLength(0) with empty string', () => { 
+test('string().minimumLength(0) with empty string', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .minimumLength(0);
 
     let result = validator.validate({
@@ -476,11 +504,11 @@ test('stringProperty().minimumLength(0) with empty string', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('stringProperty().minimumLength(0) with whitespace string', () => { 
+test('string().minimumLength(0) with whitespace string', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .minimumLength(0);
 
     let result = validator.validate({
@@ -490,11 +518,11 @@ test('stringProperty().minimumLength(0) with whitespace string', () => {
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('stringProperty().minimumLength(10) with string length greater than the value to compare', () => { 
+test('string().minimumLength(10) with string length greater than the value to compare', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .minimumLength(10);
 
     let result = validator.validate({
@@ -504,11 +532,11 @@ test('stringProperty().minimumLength(10) with string length greater than the val
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
 });
-test('stringProperty().minimumLength(10) with string length less than the value to compare', () => { 
+test('string().minimumLength(10) with string length less than the value to compare', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .minimumLength(10);
 
     let result = validator.validate({
@@ -518,11 +546,11 @@ test('stringProperty().minimumLength(10) with string length less than the value 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('stringProperty().minimumLength(10) with string length equals to the value to compare', () => {
+test('string().minimumLength(10) with string length equals to the value to compare', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .minimumLength(10);
 
     let result = validator.validate({
@@ -531,12 +559,12 @@ test('stringProperty().minimumLength(10) with string length equals to the value 
 
     expect(result.isValid).toBe(true);
     expect(result.failures).toHaveLength(0);
- });
-test('stringProperty().notEmpty() with null value', () => {  
+});
+test('string().notEmpty() with null value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .notEmpty();
 
     let result = validator.validate({
@@ -546,11 +574,11 @@ test('stringProperty().notEmpty() with null value', () => {
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('stringProperty().notEmpty() with undefined value', () => { 
+test('string().notEmpty() with undefined value', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .notEmpty();
 
     let result = validator.validate({
@@ -560,11 +588,11 @@ test('stringProperty().notEmpty() with undefined value', () => {
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('stringProperty().notEmpty() with empty string', () => { 
+test('string().notEmpty() with empty string', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .notEmpty()
 
     let result = validator.validate({
@@ -574,11 +602,11 @@ test('stringProperty().notEmpty() with empty string', () => {
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
 });
-test('stringProperty().notEmpty() with whitespace string', () => {
+test('string().notEmpty() with whitespace string', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .notEmpty()
 
     let result = validator.validate({
@@ -587,12 +615,12 @@ test('stringProperty().notEmpty() with whitespace string', () => {
 
     expect(result.isValid).toBe(false);
     expect(result.failures).toHaveLength(1);
- });
-test('stringProperty().notEmpty() with filled string', () => { 
+});
+test('string().notEmpty() with filled string', () => {
     let validator = new ObjectValidator();
 
     validator
-        .stringProperty('test')
+        .string('test')
         .notEmpty()
 
     let result = validator.validate({

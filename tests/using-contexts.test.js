@@ -5,12 +5,12 @@ test('validating context', () => {
 
     validator
         .context('validateTest', () => validator
-            .stringProperty('test')
+            .string('test')
             .notEmpty()
             .minimumLength(2)
             .length(10)
             .maximumLength(25))
-        .stringProperty('test2')
+        .string('test2')
         .notEmpty()
         .minimumLength(2)
         .length(10)
