@@ -1,6 +1,6 @@
 # FluentValidatorForJS
 
-It is a simple, customizable and very easy-to-use JavaScript library for performing object validations using chained methods.
+It's a simple, customizable and very easy-to-use JavaScript library for performing object validations using chained methods.
 
 ## Get Started
 
